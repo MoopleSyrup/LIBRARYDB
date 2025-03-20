@@ -38,6 +38,9 @@ VALUES
 ('The Fellowship of the Ring', 'J.R.R. Tolkien', 'Fantasy', 1954),  
 ('The Two Towers', 'J.R.R. Tolkien', 'Fantasy', 1954),  
 ('The Return of the King', 'J.R.R. Tolkien', 'Fantasy', 1955);
+
+/* TRUNCATE tbl_books; */
+
 INSERT INTO tbl_borrowers (BorrowerName, Email, PhoneNumber)
 VALUES 
 ('John Doe', 'john.doe@example.com', '103-456-7890'),
@@ -74,4 +77,37 @@ SET ReturnDate = '2025-03-15'
 WHERE BorrowedID = 1;
 DELETE FROM tbl_borrowers
 WHERE BorrowerID NOT IN (SELECT DISTINCT BorrowerID FROM tbl_borrowedbooks);
+
 SELECT * FROM tbl_borrowers;
+
+SELECT * FROM tbl_borrowers
+ORDER BY BorrowerName ASC, Email DESC;
+SELECT * FROM tbl_books
+ORDER BY PublishedYear DESC, Title ASC;
+
+SELECT BookID, COUNT(*) AS BookCount
+FROM tbl_books
+GROUP BY BookID;
+SELECT COUNT(*) AS TotalBooks
+FROM tbl_books;
+
+SELECT PublishedYear, COUNT(*) AS BookCount
+FROM tbl_books
+GROUP BY PublishedYear
+HAVING COUNT(*) > 1;
+
+SELECT Author, COUNT(*) AS BookCount
+FROM tbl_books
+GROUP BY Author
+HAVING COUNT(*) > 1;
+
+SELECT * FROM tbl_books;
+
+SELECT * FROM tbl_books
+WHERE PublishedYear = 2007 AND Genre = 'Science Fiction';
+
+SELECT * FROM tbl_books
+WHERE NOT Genre = 'Fantasy';
+
+SELECT * FROM tbl_books
+WHERE Genre = 'Science Fiction' OR PublishedYear = 1954;
